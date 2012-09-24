@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout    
+    xmlns:android="http://schemas.android.com/apk/res/android"    
+    android:layout_width="match_parent"    
+    android:layout_height="match_parent">
+       
+    <TextView    
+        android:id="@+id/tvScDisplayHeader"    
+        android:layout_width="fill_parent"    
+        android:layout_height="wrap_content"    
+        android:layout_alignParentTop="true"    
+        android:gravity="center"    
+        android:text="@string/str_shopping_cart"        
+        android:textColor="#E47911"    
+        android:textSize="24dip"    
+        android:padding="10dip" />     
+        
+    <LinearLayout     
+        android:id="@+id/llScDisplayFooter"    
+        android:layout_width="fill_parent"    
+        android:layout_height="wrap_content"    
+        android:layout_alignParentBottom="true"    
+        android:orientation="vertical"    
+        android:padding="10dip" >    
+
+        <!-- Checkout Button -->    
+        <Button     
+            android:id="@+id/btnAdd"    
+            android:layout_width="fill_parent"    
+            android:layout_height="wrap_content"    
+            android:layout_gravity="center"    
+            android:layout_marginTop="5dip"    
+            android:layout_marginBottom="20dip"    
+            android:text="@string/str_checkout" />    
+
+        <!-- Return to Add More Books link -->    
+        <TextView    
+            android:layout_width="wrap_content"    
+            android:layout_height="wrap_content"    
+            android:layout_gravity="center"    
+            android:text="@string/str_return_to_additems"    
+            android:textSize="12dip"    
+            android:textColor="#0000ff" />    
+    </LinearLayout>    
+        
+    <TableLayout    
+        android:id="@+id/tlUserItemList"    
+        android:layout_width="fill_parent"    
+        android:layout_height="wrap_content"    
+        android:layout_below="@+id/tvScDisplayHeader"    
+        android:layout_above="@+id/llScDisplayFooter"
+        android:paddingTop="5dip"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:paddingBottom="5dip"    
+        android:stretchColumns="0,1,2">    
+      
+        <ListView     
+            android:id="@+id/lvUserItemList"    
+            android:layout_width="fill_parent"    
+            android:layout_height="120dip"
+            android:layout_gravity="fill_vertical"
+            android:background="@drawable/back"/>    
+            
+        <TableRow
+            android:layout_width="fill_parent"    
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip">    
+                
+            <Button     
+                android:id="@+id/btnUpdateQty"    
+                android:text="@string/str_update_qty"    
+                android:layout_column="0"/>    
+            <Button     
+                android:id="@+id/btnDeleteItems"    
+                android:text="@string/str_remove_items"    
+                android:layout_column="1"/>    
+        </TableRow>    
+
+    </TableLayout>
+
+    <!-- Cart is Empty Message (Invisible by Default) -->
+    <TextView    
+        android:id="@+id/tvScIsEmpty"    
+        android:layout_width="fill_parent"        
+        android:layout_height="wrap_content"        
+        android:layout_marginTop="50dip"    
+        android:layout_below="@+id/tvScDisplayHeader"    
+        android:layout_above="@+id/llScDisplayFooter"     
+        android:gravity="center"    
+        android:visibility="invisible"    
+        android:text="@string/str_empty_cart"    
+        android:textColor="#000000"    
+        android:textSize="18dip"    
+        android:padding="10dip"/>        
+    
+</RelativeLayout>
