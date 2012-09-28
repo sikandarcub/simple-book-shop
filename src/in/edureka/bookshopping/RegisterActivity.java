@@ -40,7 +40,7 @@ public class RegisterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				switch (v.getId()) {
-				case R.id.btn_Register:
+				case R.id.btnRegister:
 					String strFullName = etRegisterFullName.getText().toString();
 					String strEmailId = etRegisterEmailId.getText().toString();
 					String strPassword = etRegisterPassword.getText().toString();
@@ -54,7 +54,7 @@ public class RegisterActivity extends Activity {
 					}
 					else
 					{
-						if (db.readShopUser(strEmailId).get_userName() != null)
+						if (db.readShopUser(strEmailId) != null)
 						{
 							Toast.makeText(getApplicationContext(), 
 									"You are already registered.\nPlease go back and Login.", 
@@ -66,14 +66,16 @@ public class RegisterActivity extends Activity {
 							if (db.addShopUser(currentUser) == true)
 							{
 								Toast.makeText(getApplicationContext(), 
-										"You are thru!!", 
+										"You are logged in", 
 										Toast.LENGTH_SHORT).show();	
+								Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+								startActivity(i);
 							}
 						}
 
 					}
 					break;
-				case R.id.tv_Link_To_Login:
+				case R.id.tvLinkToLogin:
 					Intent i = new Intent(getApplicationContext(), BookshopLogin.class);
 					startActivity(i);
 					break;
@@ -86,12 +88,12 @@ public class RegisterActivity extends Activity {
         	
         }};
         
-        etRegisterFullName = (EditText)findViewById(R.id.et_Register_FullName);
-        etRegisterEmailId = (EditText)findViewById(R.id.et_Register_EmailId);
-        etRegisterPassword = (EditText)findViewById(R.id.et_Register_Password);
-        etRegisterPasswordReEnter = (EditText)findViewById(R.id.et_Register_Password_Confirm);
-        btnRegister = (Button)findViewById(R.id.btn_Register);
-        tvLoginScreen = (TextView)findViewById(R.id.tv_Link_To_Login);
+        etRegisterFullName = (EditText)findViewById(R.id.etRegisterFullName);
+        etRegisterEmailId = (EditText)findViewById(R.id.etRegisterEmailId);
+        etRegisterPassword = (EditText)findViewById(R.id.etRegisterPassword);
+        etRegisterPasswordReEnter = (EditText)findViewById(R.id.etRegisterPasswordConfirm);
+        btnRegister = (Button)findViewById(R.id.btnRegister);
+        tvLoginScreen = (TextView)findViewById(R.id.tvLinkToLogin);
         
         btnRegister.setOnClickListener(myOnClickListener);
         tvLoginScreen.setOnClickListener(myOnClickListener);
@@ -105,13 +107,13 @@ public class RegisterActivity extends Activity {
 		if (strFullName.isEmpty() == true || strEmailId.isEmpty() == true ||
 				strPassword.isEmpty() == true || strPasswordReEnter.isEmpty() == true)
 		{
-			strValidationFailReason = "One of the Required fields is empty";
+			strValidationFailReason = "One of the Required fields is empty.";
 			return false;
 		}
 
 		if ( strPassword.compareTo(strPasswordReEnter) != 0 )
 		{
-			strValidationFailReason = "Password does not match";
+			strValidationFailReason = "Password does not match.";
 			return false;
 		}
 
@@ -119,7 +121,7 @@ public class RegisterActivity extends Activity {
 		
 		if (emailValidator.validate(strEmailId) == false)
 		{
-			strValidationFailReason = "Provided Email does not match the normal format";
+			strValidationFailReason = "Provided Email does not match the normal format.";
 			return false;
 		}
 				

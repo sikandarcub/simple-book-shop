@@ -91,8 +91,9 @@ public class UserDatabaseHandler extends SQLiteOpenHelper {
 		if (cursor != null)
 		{
 			cursor.moveToFirst();
-		    user = new ShopUser(cursor.getString(0),
-		    		cursor.getString(1),cursor.getString(2));
+			if (cursor.getCount() > 0)
+				user = new ShopUser(cursor.getString(0),
+						cursor.getString(1),cursor.getString(2));
 		}
 		
 		db.close();
@@ -160,10 +161,18 @@ public class UserDatabaseHandler extends SQLiteOpenHelper {
 			{
 				matchResult = true;
 				cursor.moveToFirst();
-				user = new ShopUser(cursor.getString(0),cursor.getString(1),
+				if (user.get_password().compareTo(cursor.getString(1)) == 0)
+				{
+					user = new ShopUser(cursor.getString(0),cursor.getString(1),
 						cursor.getString(2));
+					user.set_passwordFailedValidation(false);
+				}
+				else
+					user.set_passwordFailedValidation(true);
+				
 				Log.w(TAG, "Got: " + cursor.getString(0) + " " + cursor.getString(1) +
 						" " + cursor.getString(2));
+				
 			}
 		}
 		

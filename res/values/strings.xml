@@ -1,4 +1,5 @@
 <resources>
+
     <string name="str_app_banner">FlipKart Shopping</string>
     <string name="str_login_email">Email</string>
     <string name="str_login_password">Password</string>
@@ -31,4 +32,7 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_bookshop_login">Login to your account</string>
     <string name="title_activity_register">Create your account</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_item_display">Display of All Available Items</string>
+
 </resources>

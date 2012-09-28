@@ -37,9 +37,11 @@ public class BookshopLogin extends Activity {
 			@Override
 			public void onClick(View v) {
 				switch (v.getId()) {
-				case R.id.btn_Login:
-					if (areInputsFilled(etLoginEmailId.getText().toString(),
-							etLoginPassword.getText().toString()) == false)
+				case R.id.btnLogin:
+					String strEmailId = etLoginEmailId.getText().toString();
+					String strPassword = etLoginPassword.getText().toString();
+					
+					if (areInputsFilled(strEmailId, strPassword) == false)
 					{
 						Toast.makeText(getApplicationContext(), 
 								strValidationFailReason + "\nPlease check and try again.", 
@@ -47,25 +49,34 @@ public class BookshopLogin extends Activity {
 					}
 					else
 					{
-						currentUser = new ShopUser(etLoginEmailId.getText().toString(),
-								etLoginPassword.getText().toString());
+						currentUser = new ShopUser(strEmailId, strPassword);
 						if (db.isValidLogin(currentUser) == true)
 						{
-							Toast.makeText(getApplicationContext(), 
-									"You are thru!!", 
-									Toast.LENGTH_SHORT).show();							
-							
+							Toast.makeText(getApplicationContext(),
+									"You are Logged On.",
+									Toast.LENGTH_SHORT).show();
+							Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+							startActivity(i);
 						}
 						else
 						{
-							Toast.makeText(getApplicationContext(), 
-									"You do not required access.\nPlease register to login.", 
+							String strToDisplay = null;
+							if (currentUser.is_passwordFailedValidation() == true)
+							{
+								strToDisplay = "Your password does not match.\n" +
+										"Please check and try again";
+							}
+							else
+							{
+								strToDisplay = "You do not have required access.\n" +
+										"Please register to login.";
+							}
+							Toast.makeText(getApplicationContext(), strToDisplay, 
 									Toast.LENGTH_SHORT).show();
 						}
-						
 					}
 					break;
-				case R.id.tv_Register_Here:
+				case R.id.tvRegisterHere:
 					Intent i=new Intent(getApplicationContext(), RegisterActivity.class);
 					startActivity(i);
 					break;
@@ -74,16 +85,13 @@ public class BookshopLogin extends Activity {
 							"Debug: Weird Stuff", 
 							Toast.LENGTH_SHORT).show();				
 				}
-				
-				
-				
 			}
         };
         
-        tvRegisterScreen = (TextView)findViewById(R.id.tv_Register_Here);
-        etLoginEmailId = (EditText)findViewById(R.id.et_Login_EmailId);
-        etLoginPassword = (EditText)findViewById(R.id.et_Login_Password);
-        btnLogin = (Button)findViewById(R.id.btn_Login);
+        tvRegisterScreen = (TextView)findViewById(R.id.tvRegisterHere);
+        etLoginEmailId = (EditText)findViewById(R.id.etLoginEmailId);
+        etLoginPassword = (EditText)findViewById(R.id.etLoginPassword);
+        btnLogin = (Button)findViewById(R.id.btnLogin);
        
         btnLogin.setOnClickListener(myOnClickListener);
         tvRegisterScreen.setOnClickListener(myOnClickListener);
@@ -99,7 +107,7 @@ public class BookshopLogin extends Activity {
 	{
 		if (strEmailId.isEmpty() == true || strPassword.isEmpty() == true )
 		{
-			strValidationFailReason = "One of the Required fields is empty";
+			strValidationFailReason = "One of the Required fields is empty.";
 			return false;
 		}
 		
