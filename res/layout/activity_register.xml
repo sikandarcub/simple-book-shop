@@ -66,7 +66,8 @@
       <TextView 
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/str_login_password" />
+          android:text="@string/str_login_password"
+          android:textColor="#372c24" />
       
       <EditText 
           android:id="@+id/etRegisterPassword"
@@ -81,7 +82,8 @@
       <TextView 
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/str_login_password_confirm" />
+          android:text="@string/str_login_password_confirm"
+          android:textColor="#372c24" />
       
       <EditText 
           android:id="@+id/etRegisterPasswordConfirm"

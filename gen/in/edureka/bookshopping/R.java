@@ -30,6 +30,7 @@ public final class R {
         public static final int etRegisterFullName=0x7f070014;
         public static final int etRegisterPassword=0x7f070016;
         public static final int etRegisterPasswordConfirm=0x7f070017;
+        public static final int ivBookCover=0x7f070013;
         public static final int llCategoryItemFooter=0x7f07000f;
         public static final int llCategoryItemHeader=0x7f07000c;
         public static final int llPurchaseSummaryFooter=0x7f07001d;
@@ -43,9 +44,8 @@ public final class R {
         public static final int tlPurchaseSummary=0x7f070020;
         public static final int tlSelectedItemDetails=0x7f070010;
         public static final int tlUserItemList=0x7f070007;
-        public static final int tvBookAuthor=0x7f070012;
-        public static final int tvBookName=0x7f070011;
-        public static final int tvBookPrice=0x7f070013;
+        public static final int tvBookAuthor=0x7f070011;
+        public static final int tvBookPrice=0x7f070012;
         public static final int tvLinkToLogin=0x7f070019;
         public static final int tvPurchaseTotal=0x7f070022;
         public static final int tvRegisterHere=0x7f070003;
@@ -60,6 +60,7 @@ public final class R {
         public static final int activity_item_display=0x7f030002;
         public static final int activity_register=0x7f030003;
         public static final int activity_summary=0x7f030004;
+        public static final int gradient=0x7f030005;
     }
     public static final class menu {
         public static final int activity_bookshop_login=0x7f060000;
@@ -67,40 +68,40 @@ public final class R {
         public static final int activity_register=0x7f060002;
     }
     public static final class string {
-        public static final int app_name=0x7f04001c;
-        public static final int hello_world=0x7f040020;
-        public static final int menu_settings=0x7f04001d;
-        public static final int str_add_to_cart=0x7f04000f;
+        public static final int app_name=0x7f04001d;
+        public static final int menu_settings=0x7f04001e;
+        public static final int str_add_to_cart=0x7f040010;
         public static final int str_app_banner=0x7f040000;
-        public static final int str_app_logo=0x7f04001b;
+        public static final int str_app_logo=0x7f04001c;
         public static final int str_book_author=0x7f04000d;
+        public static final int str_book_cover=0x7f04000f;
         public static final int str_book_details=0x7f04000b;
         public static final int str_book_name=0x7f04000c;
         public static final int str_book_price=0x7f04000e;
-        public static final int str_checkout=0x7f040015;
+        public static final int str_checkout=0x7f040016;
         public static final int str_create_new_account=0x7f040006;
-        public static final int str_empty_cart=0x7f040012;
-        public static final int str_exit_app=0x7f04001a;
-        public static final int str_grand_total=0x7f040018;
+        public static final int str_empty_cart=0x7f040013;
+        public static final int str_exit_app=0x7f04001b;
+        public static final int str_grand_total=0x7f040019;
         public static final int str_link_to_login=0x7f040008;
         public static final int str_link_to_registration=0x7f040007;
         public static final int str_login_email=0x7f040001;
         public static final int str_login_password=0x7f040002;
         public static final int str_login_password_confirm=0x7f040003;
         public static final int str_login_to_account=0x7f040005;
-        public static final int str_make_another_purchase=0x7f040019;
-        public static final int str_proceed_to_checkout=0x7f040010;
-        public static final int str_purchase_summary=0x7f040017;
-        public static final int str_remove_items=0x7f040014;
-        public static final int str_return_to_additems=0x7f040016;
+        public static final int str_make_another_purchase=0x7f04001a;
+        public static final int str_proceed_to_checkout=0x7f040011;
+        public static final int str_purchase_summary=0x7f040018;
+        public static final int str_remove_items=0x7f040015;
+        public static final int str_return_to_additems=0x7f040017;
         public static final int str_select_category=0x7f040009;
         public static final int str_select_item=0x7f04000a;
-        public static final int str_shopping_cart=0x7f040011;
-        public static final int str_update_qty=0x7f040013;
+        public static final int str_shopping_cart=0x7f040012;
+        public static final int str_update_qty=0x7f040014;
         public static final int str_user_name=0x7f040004;
-        public static final int title_activity_bookshop_login=0x7f04001e;
+        public static final int title_activity_bookshop_login=0x7f04001f;
         public static final int title_activity_item_display=0x7f040021;
-        public static final int title_activity_register=0x7f04001f;
+        public static final int title_activity_register=0x7f040020;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

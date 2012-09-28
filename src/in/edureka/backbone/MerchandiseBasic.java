@@ -1,8 +1,8 @@
-package in.edureka.simplestore;
+package in.edureka.backbone;
 
 import in.edureka.utils.StringSplitter;
 
-public class MerchandiseBasic {
+public class MerchandiseBasic{
 	private String _name;
 	private String _price;
 	private String _itemCategory;
@@ -79,5 +79,4 @@ public class MerchandiseBasic {
 		
 		return tempObj;
 	}
-
 }

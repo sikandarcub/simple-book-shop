@@ -2,8 +2,9 @@ package in.edureka.bookshopping;
 
 import java.util.ArrayList;
 
-import in.edureka.simplestore.MerchandiseBooks;
-import in.edureka.simplestore.StoreForBooks;
+import in.edureka.backbone.MerchandiseBooks;
+import in.edureka.backbone.StoreForBooks;
+import in.edureka.transport.ShopUser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -25,9 +27,9 @@ public class ItemDisplayActivity extends Activity {
 	Spinner spCategoryList;
 	Spinner spItemList;
 	TableLayout tlSelectedItemDetails;
-	TextView tvBookName;
 	TextView tvBookAuthor;
 	TextView tvBookPrice;
+	ImageView ivBookCover;
 	
 	StoreForBooks bookStore;
 	MerchandiseBooks bookSelected;
@@ -38,6 +40,8 @@ public class ItemDisplayActivity extends Activity {
 	String strSelectedCategory;
 	String strSelectedItem;
 
+	ShopUser currentUser;
+	
 	private OnItemSelectedListener myOnItemSelectedListener = new OnItemSelectedListener () {
 
 		@Override
@@ -45,44 +49,40 @@ public class ItemDisplayActivity extends Activity {
 				long id) {
 			switch (parent.getId()) {
 			case R.id.spCategoryList:
-				Toast.makeText(getApplicationContext(), 
-						"Debug: Right stuff cat", 
-						Toast.LENGTH_SHORT).show();	
-
 				strSelectedCategory = strCategories[position];
 				
 				ArrayList<String> alItems = new ArrayList<String>();
-				alItems = bookStore.get_itemsForCategorySimple(strSelectedCategory);
+				alItems = bookStore.get_itemsForCategory_nameOnly(strSelectedCategory);
 				
 				strItemsInCategory = new String[alItems.size()];
 				strItemsInCategory = alItems.toArray(strItemsInCategory);
 				
-				ArrayAdapter<String> aaItems = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,strItemsInCategory);
+				ArrayAdapter<String> aaItems = 
+						new ArrayAdapter<String>(
+								getApplicationContext(),
+								android.R.layout.simple_spinner_item,
+								strItemsInCategory);
+				aaItems.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				
 				spItemList.setAdapter(aaItems);
 		        
 		        break;
 			case R.id.spItemList:
-				Toast.makeText(getApplicationContext(), 
-						"Debug: Right stuff item", 
-						Toast.LENGTH_SHORT).show();
-				
 				strSelectedItem = strItemsInCategory[position];
 				
 				MerchandiseBooks thisBook = new MerchandiseBooks();
 				
-				thisBook = (MerchandiseBooks) bookStore.get_itemDetails(
+				thisBook = bookStore.get_itemDetails(
 						strSelectedItem,strSelectedCategory);
 				
-				if (thisBook != null)
+				if (thisBook.get_name() != null)
 				{
-					Log.w(TAG, "Book: " + thisBook.get_name() + " " 
-				                        + thisBook.get_authorName() + " " 
-				                        + thisBook.get_price());
+//					Log.w(TAG, "Book: " + thisBook.get_name() + " " 
+//				                        + thisBook.get_authorName() + " " 
+//				                        + thisBook.get_price());
 					
-					tvBookName.setText(thisBook.get_name());
 					tvBookAuthor.setText(thisBook.get_authorName());
 					tvBookPrice.setText(thisBook.get_price());
-					
 				}
 
 				break;
@@ -104,14 +104,19 @@ public class ItemDisplayActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Bundle b = getIntent().getExtras();
+        currentUser =
+			b.getParcelable("in.edureka.transport.ShopUser");
+		
         setContentView(R.layout.activity_item_display);
         
         spCategoryList = (Spinner)findViewById(R.id.spCategoryList);
         spItemList = (Spinner)findViewById(R.id.spItemList);
         tlSelectedItemDetails = (TableLayout)findViewById(R.id.tlSelectedItemDetails);
-        tvBookName = (TextView)findViewById(R.id.tvBookName);
         tvBookAuthor = (TextView)findViewById(R.id.tvBookAuthor);
         tvBookPrice = (TextView)findViewById(R.id.tvBookPrice);
+        ivBookCover = (ImageView)findViewById(R.id.ivBookCover);
         
         spCategoryList.setOnItemSelectedListener(myOnItemSelectedListener);
         spItemList.setOnItemSelectedListener(myOnItemSelectedListener);
@@ -131,8 +136,18 @@ public class ItemDisplayActivity extends Activity {
         strCategories = new String[alCategories.size()];
         strCategories = alCategories.toArray(strCategories);
 
-        ArrayAdapter<String> aaCategories = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,strCategories);
+        ArrayAdapter<String> aaCategories = 
+        		new ArrayAdapter<String>(
+        				this,
+        				android.R.layout.simple_spinner_item,
+        				strCategories);
+        aaCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        
         spCategoryList.setAdapter(aaCategories);
+        
+		Toast.makeText(getApplicationContext(), 
+				"Debug: " + currentUser.get_fullName() + " " + currentUser.get_userName(), 
+				Toast.LENGTH_SHORT).show();
     }
 
     @Override

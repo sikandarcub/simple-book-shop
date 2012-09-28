@@ -1,5 +1,6 @@
-package in.edureka.bookshopping;
+package in.edureka.backbone;
 
+import in.edureka.transport.ShopUser;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -163,8 +164,8 @@ public class UserDatabaseHandler extends SQLiteOpenHelper {
 				cursor.moveToFirst();
 				if (user.get_password().compareTo(cursor.getString(1)) == 0)
 				{
-					user = new ShopUser(cursor.getString(0),cursor.getString(1),
-						cursor.getString(2));
+					user.set_fullName(cursor.getString(2));
+					Log.w(TAG, "Got: new " + cursor.getString(2));
 					user.set_passwordFailedValidation(false);
 				}
 				else

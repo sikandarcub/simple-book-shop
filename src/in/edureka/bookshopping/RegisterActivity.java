@@ -1,5 +1,7 @@
 package in.edureka.bookshopping;
 
+import in.edureka.backbone.UserDatabaseHandler;
+import in.edureka.transport.ShopUser;
 import in.edureka.utils.EmailValidator;
 import android.os.Bundle;
 import android.app.Activity;
@@ -69,6 +71,8 @@ public class RegisterActivity extends Activity {
 										"You are logged in", 
 										Toast.LENGTH_SHORT).show();	
 								Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+								i.putExtra("in.edureka.transport.ShopUser", currentUser);
+								
 								startActivity(i);
 							}
 						}

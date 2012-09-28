@@ -1,5 +1,7 @@
 package in.edureka.bookshopping;
 
+import in.edureka.backbone.UserDatabaseHandler;
+import in.edureka.transport.ShopUser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -53,9 +55,12 @@ public class BookshopLogin extends Activity {
 						if (db.isValidLogin(currentUser) == true)
 						{
 							Toast.makeText(getApplicationContext(),
-									"You are Logged On.",
+									"You are Logged On." + currentUser.get_fullName(),
 									Toast.LENGTH_SHORT).show();
+							
 							Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+							i.putExtra("in.edureka.transport.ShopUser", currentUser);
+							
 							startActivity(i);
 						}
 						else
