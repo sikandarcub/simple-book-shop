@@ -51,7 +51,7 @@
 
             <!-- Add to cart Button -->
             <Button 
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnItemAdd"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -59,14 +59,21 @@
                 android:layout_marginBottom="20dip"
                 android:text="@string/str_add_to_cart" />
 
-            <!-- Skip and Proceed to Checkout link -->
+            <!-- Proceed to Checkout -->
             <TextView
+                android:id="@+id/tvLinkToCartDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dip"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
                 android:text="@string/str_proceed_to_checkout"
-                android:textSize="12dip"
-                android:textColor="#0000ff" />
+                android:textSize="18dip"
+                android:textColor="#0000ff"
+                android:background="@drawable/back"/>
         </LinearLayout>
 
         <!-- Selected Book details block starts -->
@@ -110,6 +117,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dip"
                         android:paddingLeft="10dip"
+                        android:paddingTop="2dip"
+                        android:paddingBottom="2dip"
+                        android:paddingRight="2dip"
                         android:background="@drawable/back"/>
                     
                     <TextView
@@ -128,11 +138,14 @@
                         android:layout_marginLeft="5dip"
                         android:layout_marginBottom="5dip"
                         android:paddingLeft="10dip"
+                        android:paddingTop="2dip"
+                        android:paddingBottom="2dip"
+                        android:paddingRight="2dip"
                         android:background="@drawable/back"/>
                 </LinearLayout>
 
                 <FrameLayout
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_width="0dp"
                     android:layout_weight="1">
                     <ImageView 

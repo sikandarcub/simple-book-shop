@@ -17,7 +17,7 @@
     <string name="str_book_price">Unit Price (in USD)</string>
     <string name="str_book_cover">Book Cover</string>
     <string name="str_add_to_cart">Add to Cart</string>
-    <string name="str_proceed_to_checkout">Skip and Proceed to Checkout</string>
+    <string name="str_proceed_to_checkout">Proceed to Checkout</string>
     <string name="str_shopping_cart">Shopping Cart</string>
     <string name="str_empty_cart">Your Shopping Cart is empty</string>
     <string name="str_update_qty">Update Quantities</string>
@@ -34,5 +34,7 @@
     <string name="title_activity_bookshop_login">Login to your account</string>
     <string name="title_activity_register">Create your account</string>
     <string name="title_activity_item_display">Select from Available Items</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_cart_display">Your Shopping Cart</string>
 
 </resources>

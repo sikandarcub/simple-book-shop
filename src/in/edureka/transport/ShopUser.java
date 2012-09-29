@@ -95,6 +95,10 @@ public class ShopUser implements Parcelable{
 		this._shoppingList = _shoppingList;
 	}
 
+	public void add_itemToShoppingList(ShopItem item) {
+		this._shoppingList.add(item);
+	}
+	
 	public boolean is_passwordFailedValidation() {
 		return _passwordFailedValidation;
 	}

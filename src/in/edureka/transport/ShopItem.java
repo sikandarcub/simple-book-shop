@@ -9,12 +9,12 @@ public class ShopItem implements Parcelable{
 	private static final String TAG = "ShopItem";
 	
 	private String _name;
-	private String _price;
+	private double _price;
 	private int _quantity;
 	
 	public ShopItem() {
 		this._name = null;
-		this._price = null;
+		this._price = 0;
 		this._quantity = 0;
 	}
 	
@@ -24,16 +24,22 @@ public class ShopItem implements Parcelable{
 		readFromParcel(source);
 	}
 	
+	public ShopItem(String name, double price) {
+		this._name = name;
+		this._price = price;
+		this._quantity = 1;
+	}
+
 	public String get_name() {
 		return _name;
 	}
 	public void set_name(String _name) {
 		this._name = _name;
 	}
-	public String get_price() {
+	public double get_price() {
 		return _price;
 	}
-	public void set_price(String _price) {
+	public void set_price(double _price) {
 		this._price = _price;
 	}
 	public int get_quantity() {
@@ -55,7 +61,7 @@ public class ShopItem implements Parcelable{
 		// written to the parcel
 		Log.v(TAG, "writeToParcel..."+ flags);
 		dest.writeString(get_name());
-		dest.writeString(get_price());
+		dest.writeDouble(get_price());
 		dest.writeInt(get_quantity());
 	}
 
@@ -64,7 +70,7 @@ public class ShopItem implements Parcelable{
 		// field in the order that it was
 		// written to the parcel
 		_name = in.readString();
-		_price = in.readString();
+		_price = in.readDouble();
 		_quantity = in.readInt();
 	}
 
