@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <!-- Name and Price details -->
+        <TextView
+            android:id="@+id/tvScItemName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@+id/tvItemName"
+            android:textColor="#372c24"
+            android:paddingLeft="5dip"
+            android:maxLines="1"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvScItemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dip"
+                android:paddingTop="1dip"
+                android:paddingBottom="2dip"
+                android:paddingRight="2dip"
+                android:gravity="left"
+                android:text="@+id/tvItemPrice"
+                android:textColor="#8CA6A4"
+                android:textSize="12dip"/>
+            <TextView
+                android:id="@+id/tvScItemPriceCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="2dip"
+                android:paddingTop="1dip"
+                android:paddingBottom="2dip"
+                android:paddingRight="2dip"
+                android:text="@string/str_book_price_currency"
+                android:textColor="#8CA6A4"
+                android:textSize="12dip"/>
+        </LinearLayout>
+</LinearLayout>
