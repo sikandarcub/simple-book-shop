@@ -7,12 +7,14 @@
         
         <!-- Category and Item List -->
         <LinearLayout
-            android:id="@+id/llCategoryItemHeader"
+            android:id="@+id/llIdCategoryItemHeader"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:orientation="vertical"
-            android:padding="10dip"
+            android:paddingTop="10dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
             android:gravity="left">
             <!-- Category Label -->
             <TextView 
@@ -20,9 +22,10 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dip"
                 android:text="@string/str_select_category"
-                android:textColor="#372c24"/>
+                android:textColor="#372c24"
+                android:textStyle="bold"/>
             <Spinner 
-                android:id="@+id/spCategoryList"
+                android:id="@+id/spIdCategoryList"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
             <!-- Item List Label -->
@@ -32,26 +35,29 @@
                 android:text="@string/str_select_item"
                 android:paddingTop="10dip"
                 android:paddingBottom="5dip"
-                android:textColor="#372c24"/>
+                android:textColor="#372c24"
+                android:textStyle="bold" />
             <Spinner 
-                android:id="@+id/spItemList"
+                android:id="@+id/spIdItemList"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <!-- Add to Cart Button and Skip to Checkout link -->
         <LinearLayout
-            android:id="@+id/llCategoryItemFooter"
+            android:id="@+id/llIdCategoryItemFooter"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical"
-            android:padding="10dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingBottom="10dip"
             android:gravity="center">
 
             <!-- Add to cart Button -->
             <Button 
-                android:id="@+id/btnItemAdd"
+                android:id="@+id/btnIdItemAdd"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -61,7 +67,7 @@
 
             <!-- Proceed to Checkout -->
             <TextView
-                android:id="@+id/tvLinkToCartDisplay"
+                android:id="@+id/tvIdLinkToCartDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -71,7 +77,7 @@
                 android:paddingLeft="20dip"
                 android:paddingRight="20dip"
                 android:text="@string/str_proceed_to_checkout"
-                android:textSize="18dip"
+                android:textSize="16dip"
                 android:textColor="#0000ff"
                 android:background="@drawable/back"/>
         </LinearLayout>
@@ -79,23 +85,24 @@
         <!-- Selected Book details block starts -->
 
         <TableLayout
-            android:id="@+id/tlSelectedItemDetails"
+            android:id="@+id/tlIdSelectedItemDetails"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_above="@+id/llCategoryItemFooter"
-            android:layout_below="@+id/llCategoryItemHeader"
-            android:layout_margin="5dip"
-            android:padding="5dip"
+            android:layout_above="@+id/llIdCategoryItemFooter"
+            android:layout_below="@+id/llIdCategoryItemHeader"
+            android:paddingTop="5dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
             android:stretchColumns="1">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:padding="2dip"
-                android:layout_margin="2dip"
-                android:gravity="center"
+                android:paddingBottom="5dip"
+                android:gravity="left"
                 android:text="@string/str_book_details"
-                android:textColor="#372c24"/>
+                android:textColor="#372c24"
+                android:textStyle="bold" />
             
             <TableRow
                 android:layout_margin="2dip">
@@ -107,41 +114,57 @@
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dip"
                         android:layout_marginLeft="5dip"
                         android:text="@string/str_book_author"
                         android:textColor="#372c24"/>
                     <TextView
-                        android:id="@+id/tvBookAuthor"
+                        android:id="@+id/tvIdBookAuthor"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dip"
-                        android:paddingLeft="10dip"
+                        android:paddingLeft="5dip"
                         android:paddingTop="2dip"
                         android:paddingBottom="2dip"
                         android:paddingRight="2dip"
+                        android:layout_marginTop="5dip"
+                        android:layout_marginBottom="10dip"
+                        android:singleLine="true"
                         android:background="@drawable/back"/>
                     
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dip"
                         android:layout_marginLeft="5dip"
                         android:text="@string/str_book_price"
                         android:textColor="#372c24"/>
                     
-                    <TextView
-                        android:id="@+id/tvBookPrice"
+                    <LinearLayout 
+                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14dip"
-                        android:layout_marginLeft="5dip"
-                        android:layout_marginBottom="5dip"
-                        android:paddingLeft="10dip"
-                        android:paddingTop="2dip"
-                        android:paddingBottom="2dip"
-                        android:paddingRight="2dip"
-                        android:background="@drawable/back"/>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tvIdBookPrice"
+                            android:layout_width="0dp"
+                            android:layout_weight=".60"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dip"
+                            android:paddingTop="2dip"
+                            android:paddingBottom="2dip"
+                            android:paddingRight="2dip"
+                            android:layout_marginTop="5dip"
+                            android:singleLine="true"
+                            android:background="@drawable/back"/>
+                        <TextView
+                            android:id="@+id/tvIdBookPriceCurrency"
+                            android:layout_width="0dp"
+                            android:layout_weight=".40"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dip"
+                            android:paddingTop="2dip"
+                            android:paddingBottom="2dip"
+                            android:paddingRight="2dip"
+                            android:layout_marginTop="5dip"
+                            android:text="@string/str_book_price_currency"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <FrameLayout
@@ -149,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1">
                     <ImageView 
-                        android:id="@+id/ivBookCover"
+                        android:id="@+id/ivIdBookCover"
                         android:contentDescription="@string/str_book_cover"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 package in.edureka.bookshopping;
 
-import in.edureka.backbone.UserDatabaseHandler;
+import in.edureka.helpers.UserDatabaseHandler;
 import in.edureka.transport.ShopUser;
 import android.os.Bundle;
 import android.app.Activity;
@@ -59,8 +59,8 @@ public class BookshopLogin extends Activity {
 									Toast.LENGTH_SHORT).show();
 							
 							Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+							i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 							i.putExtra("in.edureka.transport.ShopUser", currentUser);
-							
 							startActivity(i);
 						}
 						else

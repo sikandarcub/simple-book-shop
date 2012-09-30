@@ -74,7 +74,7 @@ public class ShopItem implements Parcelable{
 		_quantity = in.readInt();
 	}
 
-    /**
+	/**
     *
     * This field is needed for Android to be able to
     * create new objects, individually or as arrays.

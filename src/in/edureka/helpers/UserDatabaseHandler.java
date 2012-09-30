@@ -1,4 +1,4 @@
-package in.edureka.backbone;
+package in.edureka.helpers;
 
 import in.edureka.transport.ShopUser;
 import android.content.ContentValues;

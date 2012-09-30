@@ -23,6 +23,7 @@ public class ShopUser implements Parcelable{
 	private boolean _passwordFailedValidation = false;
 
 	private ArrayList<ShopItem> _shoppingList = new ArrayList<ShopItem>();
+	private float _taxPercent = 0;
 	
 	// Constructor
 	public ShopUser() {
@@ -98,6 +99,10 @@ public class ShopUser implements Parcelable{
 	public void add_itemToShoppingList(ShopItem item) {
 		this._shoppingList.add(item);
 	}
+
+	public void cleanup_shoppingList() {
+		this._shoppingList.clear();
+	}
 	
 	public boolean is_passwordFailedValidation() {
 		return _passwordFailedValidation;
@@ -107,6 +112,60 @@ public class ShopUser implements Parcelable{
 		this._passwordFailedValidation = _passwordFailedValidation;
 	}
 
+    public float get_taxPercent() {
+		return _taxPercent;
+	}
+
+	public void set_taxPercent(float _taxPercent) {
+		this._taxPercent = _taxPercent;
+	}
+	
+	/**
+	 * Build the Item Names for display
+	 * @return
+	 */
+	public String get_itemNames() {
+		String appendStr = "- ";
+		String finalStr = "";
+		
+		for (ShopItem item:this.get_shoppingList())
+		{
+			if (item != null)
+			{
+				if (finalStr.isEmpty() == true)
+				{
+					finalStr = appendStr + item.get_name() + "\n";
+				}
+				else
+					finalStr += appendStr + item.get_name() + "\n";
+			}
+		}
+		return finalStr;
+	}
+
+	/**
+	 * Get total cost to the user based on the current purchase;
+	 * @return total cost of the current purchase
+	 */
+    public double get_totalCostInclusiveTax() {
+    	double totalCost = 0;
+		for (ShopItem item:this.get_shoppingList())
+		{
+			if (item != null)
+			{
+				totalCost += item.get_price() * item.get_quantity();
+			}
+		}
+		
+		if (totalCost > 0)
+		{
+			double tax = (totalCost * (double) this.get_taxPercent()) / 100;
+			totalCost += tax;
+		}
+		
+		return totalCost;
+    }
+    
 	@Override
 	public int describeContents() {
 		return 0;
@@ -120,6 +179,7 @@ public class ShopUser implements Parcelable{
 		Log.v(TAG, "writeToParcel..."+ flags);
 		dest.writeString(get_fullName());
 		dest.writeString(get_userName());
+		dest.writeFloat(get_taxPercent());
 		dest.writeTypedList(get_shoppingList());
 	}
 	
@@ -129,10 +189,11 @@ public class ShopUser implements Parcelable{
 		// written to the parcel
 		_fullName = source.readString();
 		_userName = source.readString();
+		_taxPercent = source.readFloat();
 		source.readTypedList(_shoppingList, ShopItem.CREATOR);
 	}
 
-    /**
+	/**
     *
     * This field is needed for Android to be able to
     * create new objects, individually or as arrays.

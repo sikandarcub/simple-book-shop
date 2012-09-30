@@ -28,14 +28,14 @@ public class ItemDisplayActivity extends Activity {
 	// For debug only
 	private static final String TAG = "ItemDisplay";
 	
-	Spinner spCategoryList;
-	Spinner spItemList;
-	TableLayout tlSelectedItemDetails;
-	TextView tvBookAuthor;
-	TextView tvBookPrice;
-	ImageView ivBookCover;
-	Button btnItemAdd;
-	TextView tvLinkToCartDisplay;
+	Spinner spIdCategoryList;
+	Spinner spIdItemList;
+	TableLayout tlIdSelectedItemDetails;
+	TextView tvIdBookAuthor;
+	TextView tvIdBookPrice;
+	ImageView ivIdBookCover;
+	Button btnIdItemAdd;
+	TextView tvIdLinkToCartDisplay;
 	
 	StoreForBooks bookStore;
 	MerchandiseBooks bookSelected;
@@ -54,13 +54,14 @@ public class ItemDisplayActivity extends Activity {
 		public void onItemSelected(AdapterView<?> parent, View v, int position,
 				long id) {
 			switch (parent.getId()) {
-			case R.id.spCategoryList:
+			case R.id.spIdCategoryList:
 				strSelectedCategory = strCategories[position];
 				refreshItemList(strSelectedCategory);
 		        break;
-			case R.id.spItemList:
+			case R.id.spIdItemList:
 				strSelectedItem = strItemsInCategory[position];
-				displayItemInformation(strSelectedItem,strSelectedCategory);
+				displayItemInformation(strSelectedItem, strSelectedCategory);
+				Log.w(TAG, "Got: " + bookSelected.get_authorName() + " " + bookSelected.get_price());
 				break;
 			default:
 				Toast.makeText(getApplicationContext(), 
@@ -82,11 +83,15 @@ public class ItemDisplayActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
-			case R.id.btnItemAdd:
+			case R.id.btnIdItemAdd:
 				String itemNames = null;
 				String displayMessage = null;
-				itemNames = addItemToUserShoppingList(bookSelected);
-				if (itemNames != null)	{
+				
+				if(bookSelected != null) {
+					itemNames = addItemToUserShoppingList(bookSelected);
+				}
+				
+				if (itemNames.isEmpty() == true)	{
 					displayMessage = "Error: Could not add item to shopping cart";
 				}
 				else {
@@ -97,8 +102,9 @@ public class ItemDisplayActivity extends Activity {
 						Toast.LENGTH_SHORT).show();
 				break;
 				
-			case R.id.tvLinkToCartDisplay:
+			case R.id.tvIdLinkToCartDisplay:
 				Intent i=new Intent(getApplicationContext(), CartDisplayActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				i.putExtra("in.edureka.transport.ShopUser", currentUser);
 				startActivity(i);
 				break;
@@ -122,41 +128,59 @@ public class ItemDisplayActivity extends Activity {
 		
         setContentView(R.layout.activity_item_display);
         
-        spCategoryList = (Spinner)findViewById(R.id.spCategoryList);
-        spItemList = (Spinner)findViewById(R.id.spItemList);
-        tlSelectedItemDetails = (TableLayout)findViewById(R.id.tlSelectedItemDetails);
-        tvBookAuthor = (TextView)findViewById(R.id.tvBookAuthor);
-        tvBookPrice = (TextView)findViewById(R.id.tvBookPrice);
-        ivBookCover = (ImageView)findViewById(R.id.ivBookCover);
-        btnItemAdd = (Button)findViewById(R.id.btnItemAdd);
-        tvLinkToCartDisplay = (TextView)findViewById(R.id.tvLinkToCartDisplay);
+        spIdCategoryList = (Spinner)findViewById(R.id.spIdCategoryList);
+        spIdItemList = (Spinner)findViewById(R.id.spIdItemList);
+        tlIdSelectedItemDetails = (TableLayout)findViewById(R.id.tlIdSelectedItemDetails);
+        tvIdBookAuthor = (TextView)findViewById(R.id.tvIdBookAuthor);
+        tvIdBookPrice = (TextView)findViewById(R.id.tvIdBookPrice);
+        ivIdBookCover = (ImageView)findViewById(R.id.ivIdBookCover);
+        btnIdItemAdd = (Button)findViewById(R.id.btnIdItemAdd);
+        tvIdLinkToCartDisplay = (TextView)findViewById(R.id.tvIdLinkToCartDisplay);
         
-        spCategoryList.setOnItemSelectedListener(myOnItemSelectedListener);
-        spItemList.setOnItemSelectedListener(myOnItemSelectedListener);
+        spIdCategoryList.setOnItemSelectedListener(myOnItemSelectedListener);
+        spIdItemList.setOnItemSelectedListener(myOnItemSelectedListener);
         
-        btnItemAdd.setOnClickListener(myOnClickListener );
-        tvLinkToCartDisplay.setOnClickListener(myOnClickListener);
+        btnIdItemAdd.setOnClickListener(myOnClickListener );
+        tvIdLinkToCartDisplay.setOnClickListener(myOnClickListener);
 
         initializeCategoryList();
     }
 
-    /**
-     * Derives and fills the relevant data for the Item
-     * @param currentItem Title for the selected item
-     * @param currentCategory Category selected by the user
-     */
-    protected void displayItemInformation(String currentItem,
-			String currentCategory) {
-		MerchandiseBooks thisBook = new MerchandiseBooks();
-		
-		thisBook = bookStore.get_itemDetails(
-				currentItem,currentCategory);
-		
-		if (thisBook.get_name() != null)
-		{	
-			tvBookAuthor.setText(thisBook.get_authorName());
-			tvBookPrice.setText(thisBook.get_price());
-		}
+
+	/**
+	 * Derives the category list and updates categoryList spinner
+	 */
+	private void initializeCategoryList() {
+        float taxPercentage = (float) 6.5;
+        String fileDB = new String("fileDB.csv"); 
+        bookStore = new StoreForBooks(taxPercentage, fileDB);
+        
+        currentUser.set_taxPercent(bookStore.get_taxPercentage());
+        if (bookStore.get_totalNumOfItemInStore() < 0 )
+        {
+        	Toast.makeText(getApplicationContext(), "No Items in Store", Toast.LENGTH_SHORT).show();
+        }
+        
+        bookSelected = new MerchandiseBooks();
+        ArrayList<String> alCategories = bookStore.get_categoryList();
+        
+        Log.w(TAG, "Got: " + alCategories.size());
+        
+        strCategories = new String[alCategories.size()];
+        strCategories = alCategories.toArray(strCategories);
+
+        ArrayAdapter<String> aaCategories = 
+        		new ArrayAdapter<String>(
+        				this,
+        				android.R.layout.simple_spinner_item,
+        				strCategories);
+        aaCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        
+        spIdCategoryList.setAdapter(aaCategories);
+        
+		Toast.makeText(getApplicationContext(), 
+				"Debug: " + currentUser.get_fullName() + " " + currentUser.get_userName(), 
+				Toast.LENGTH_SHORT).show();		
 	}
 
     /**
@@ -177,63 +201,42 @@ public class ItemDisplayActivity extends Activity {
 						strItemsInCategory);
 		aaItems.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
-		spItemList.setAdapter(aaItems);
+		spIdItemList.setAdapter(aaItems);
 	}
 
-	/**
-	 * Derives the category list and updates categoryList spinner
-	 */
-	private void initializeCategoryList() {
-        float taxPercentage = (float) 6.5;
-        String fileDB = new String("fileDB.csv"); 
-        bookStore = new StoreForBooks(taxPercentage, fileDB);
-        if (bookStore.get_totalNumOfItemInStore() < 0 )
-        {
-        	Toast.makeText(getApplicationContext(), "No Items in Store", Toast.LENGTH_SHORT).show();
-        }
-        
-        ArrayList<String> alCategories = bookStore.get_categoryList();
-        
-        Log.w(TAG, "Got: " + alCategories.size());
-        
-        strCategories = new String[alCategories.size()];
-        strCategories = alCategories.toArray(strCategories);
-
-        ArrayAdapter<String> aaCategories = 
-        		new ArrayAdapter<String>(
-        				this,
-        				android.R.layout.simple_spinner_item,
-        				strCategories);
-        aaCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        
-        spCategoryList.setAdapter(aaCategories);
-        
-		Toast.makeText(getApplicationContext(), 
-				"Debug: " + currentUser.get_fullName() + " " + currentUser.get_userName(), 
-				Toast.LENGTH_SHORT).show();		
+    /**
+     * Derives and fills the relevant data for the Item
+     * @param currentItem Title for the selected item
+     * @param currentCategory Category selected by the user
+     */
+    protected void displayItemInformation(String currentItem,
+			String currentCategory) {
+		MerchandiseBooks thisBook = new MerchandiseBooks();
+		
+		thisBook = bookStore.get_itemDetails(
+				currentItem,currentCategory);
+		
+		if (thisBook.get_name() != null)
+		{	
+			tvIdBookAuthor.setText(thisBook.get_authorName());
+			tvIdBookPrice.setText(thisBook.get_price());
+		}
+		
+		bookSelected.set_name(thisBook.get_name());
+		bookSelected.set_price(thisBook.get_price());
+		bookSelected.set_authorName(thisBook.get_authorName());
 	}
 
 	/**
 	 * Adds the selected Book to the Shopping list of the user
 	 * @param thisBook Book selected to be added to cart
-	 * @param itemNames List of the current selections
 	 * @return Formatted list of all item added to cart (Names only)
 	 */
 	protected String addItemToUserShoppingList(MerchandiseBooks thisBook) {
-		ShopItem newBoook = new ShopItem(thisBook.get_name(), Double.parseDouble(thisBook.get_price()));
+		ShopItem newBoook = new ShopItem(
+				thisBook.get_name(), Double.parseDouble(thisBook.get_price()));
 		currentUser.add_itemToShoppingList(newBoook);
-		
-		String appendStr = "- ";
-		String finalStr = null;
-
-		for (ShopItem item:currentUser.get_shoppingList())
-		{
-			if (item != null)
-			{
-				finalStr += appendStr + item.get_name() + "\n";
-			}
-		}
-		return finalStr;
+		return currentUser.get_itemNames();
 	}
 
 	@Override
