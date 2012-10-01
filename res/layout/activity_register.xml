@@ -16,13 +16,15 @@
       
       <!-- Logo and Application banner -->
       
-      <TextView 
+      <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="20dip"
           android:layout_gravity="center_horizontal"
-          android:drawableLeft="@drawable/sc68"
-          android:drawablePadding="20dip"
+          android:gravity="center_vertical"
+          android:layout_marginBottom="20dip"
+          android:contentDescription="@string/app_name"
+          android:drawableRight="@drawable/ic_launcher"
+          android:drawablePadding="16dip"
           android:text="@string/str_app_banner"
           android:textAppearance="?android:attr/textAppearanceLarge"
           android:textColor="#0b84aa"/>

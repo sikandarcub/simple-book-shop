@@ -17,18 +17,19 @@ public final class R {
         public static final int sc68=0x7f020003;
     }
     public static final class id {
-        public static final int btnExit=0x7f07001d;
         public static final int btnIdItemAdd=0x7f070011;
+        public static final int btnIdLinkToCartDisplay=0x7f070012;
         public static final int btnLogin=0x7f070002;
-        public static final int btnRegister=0x7f070025;
-        public static final int btnRestart=0x7f07001c;
-        public static final int btnScProceedToCheckoutOrExit=0x7f070006;
+        public static final int btnPsRestart=0x7f07001c;
+        public static final int btnRegister=0x7f07002a;
+        public static final int btnScLinkToAddItems=0x7f070007;
+        public static final int btnScProceedToCheckout=0x7f070006;
         public static final int etLoginEmailId=0x7f070000;
         public static final int etLoginPassword=0x7f070001;
-        public static final int etRegisterEmailId=0x7f070022;
-        public static final int etRegisterFullName=0x7f070021;
-        public static final int etRegisterPassword=0x7f070023;
-        public static final int etRegisterPasswordConfirm=0x7f070024;
+        public static final int etRegisterEmailId=0x7f070027;
+        public static final int etRegisterFullName=0x7f070026;
+        public static final int etRegisterPassword=0x7f070028;
+        public static final int etRegisterPasswordConfirm=0x7f070029;
         public static final int ivIdBookCover=0x7f070017;
         public static final int llIdCategoryItemFooter=0x7f070010;
         public static final int llIdCategoryItemHeader=0x7f07000d;
@@ -36,32 +37,36 @@ public final class R {
         public static final int llPurchaseSummaryHeader=0x7f070018;
         public static final int llScDisplayFooter=0x7f070005;
         public static final int llScShoppingList=0x7f070008;
-        public static final int lvPurchaseSummaryList=0x7f07001f;
+        public static final int lvPsUserItemList=0x7f070025;
         public static final int lvScUserItemList=0x7f070009;
-        public static final int menu_settings=0x7f07002c;
+        public static final int menu_settings=0x7f070031;
+        public static final int rlPurchaseSummary=0x7f07001d;
         public static final int spIdCategoryList=0x7f07000e;
         public static final int spIdItemList=0x7f07000f;
         public static final int tlIdSelectedItemDetails=0x7f070013;
-        public static final int tlPurchaseSummary=0x7f07001e;
+        public static final int tlPsTotals=0x7f07001e;
         public static final int tvIdBookAuthor=0x7f070014;
         public static final int tvIdBookPrice=0x7f070015;
         public static final int tvIdBookPriceCurrency=0x7f070016;
-        public static final int tvIdLinkToCartDisplay=0x7f070012;
-        public static final int tvItemName=0x7f070028;
-        public static final int tvItemPrice=0x7f07002a;
-        public static final int tvLinkToLogin=0x7f070026;
-        public static final int tvPurchaseTotal=0x7f070020;
+        public static final int tvItemName=0x7f07002d;
+        public static final int tvItemPrice=0x7f07002f;
+        public static final int tvLinkToLogin=0x7f07002b;
+        public static final int tvPsGrandTCurrency=0x7f070024;
+        public static final int tvPsGrandTotal=0x7f070023;
+        public static final int tvPsSaleTCurrency=0x7f070022;
+        public static final int tvPsSubTCurrency=0x7f070020;
+        public static final int tvPsSubTotal=0x7f07001f;
+        public static final int tvPsTax=0x7f070021;
+        public static final int tvPsUserEmailId=0x7f07001a;
+        public static final int tvPsUserFullName=0x7f070019;
         public static final int tvRegisterHere=0x7f070003;
         public static final int tvScDisplayHeader=0x7f070004;
         public static final int tvScGrandTotal=0x7f07000b;
         public static final int tvScIsEmpty=0x7f07000c;
-        public static final int tvScItemName=0x7f070027;
-        public static final int tvScItemPrice=0x7f070029;
-        public static final int tvScItemPriceCurrency=0x7f07002b;
-        public static final int tvScLinkToAddItems=0x7f070007;
+        public static final int tvScItemName=0x7f07002c;
+        public static final int tvScItemPrice=0x7f07002e;
+        public static final int tvScItemPriceCurrency=0x7f070030;
         public static final int tvScTaxPercent=0x7f07000a;
-        public static final int tv_User_EmailId=0x7f07001a;
-        public static final int tv_User_FullName=0x7f070019;
     }
     public static final class layout {
         public static final int activity_bookshop_login=0x7f030000;
@@ -79,8 +84,8 @@ public final class R {
         public static final int activity_register=0x7f060004;
     }
     public static final class string {
-        public static final int app_name=0x7f040022;
-        public static final int menu_settings=0x7f040023;
+        public static final int app_name=0x7f040024;
+        public static final int menu_settings=0x7f040025;
         public static final int str_add_to_cart=0x7f040011;
         public static final int str_app_banner=0x7f040000;
         public static final int str_app_logo=0x7f04001f;
@@ -107,21 +112,25 @@ public final class R {
         public static final int str_remove_items=0x7f040016;
         public static final int str_return_to_additems=0x7f040019;
         public static final int str_sales_tax=0x7f040020;
+        public static final int str_sales_tax_calculated=0x7f040021;
         public static final int str_select_category=0x7f040009;
         public static final int str_select_item=0x7f04000a;
         public static final int str_shopping_cart=0x7f040013;
         public static final int str_start_another_purchase=0x7f04001d;
-        public static final int str_total_cost=0x7f040021;
+        public static final int str_sub_total=0x7f040022;
+        public static final int str_total_cost=0x7f040023;
         public static final int str_update_cart=0x7f040018;
         public static final int str_update_qty=0x7f040015;
         public static final int str_user_name=0x7f040004;
-        public static final int title_activity_bookshop_login=0x7f040024;
-        public static final int title_activity_cart_display=0x7f040027;
-        public static final int title_activity_item_display=0x7f040026;
-        public static final int title_activity_purchase_summary=0x7f040028;
-        public static final int title_activity_register=0x7f040025;
+        public static final int title_activity_bookshop_login=0x7f040026;
+        public static final int title_activity_cart_display=0x7f040029;
+        public static final int title_activity_item_display=0x7f040028;
+        public static final int title_activity_purchase_summary=0x7f04002a;
+        public static final int title_activity_register=0x7f040027;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;
+        public static final int SpinnerItem=0x7f050001;
+        public static final int SpinnerItem_DropDownItem=0x7f050002;
     }
 }

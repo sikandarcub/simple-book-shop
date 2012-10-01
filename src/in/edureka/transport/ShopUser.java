@@ -147,7 +147,7 @@ public class ShopUser implements Parcelable{
 	 * Get total cost to the user based on the current purchase;
 	 * @return total cost of the current purchase
 	 */
-    public double get_totalCostInclusiveTax() {
+    public double get_totalCostExcludingTax() {
     	double totalCost = 0;
 		for (ShopItem item:this.get_shoppingList())
 		{
@@ -156,16 +156,37 @@ public class ShopUser implements Parcelable{
 				totalCost += item.get_price() * item.get_quantity();
 			}
 		}
-		
-		if (totalCost > 0)
+		return totalCost;
+    }
+
+	/**
+	 * Get total tax for the current purchase;
+	 * @return total cost of the current purchase
+	 */
+    public double get_totalTax() {
+		double totalCost = 0;
+		double tax = 0;
+		if ((totalCost = this.get_totalCostExcludingTax()) > 0)
+		{
+			tax = (totalCost * (double) this.get_taxPercent()) / 100;
+		}
+		return tax;
+    }
+    
+	/**
+	 * Get grand total of purchase including Tax;
+	 * @return total cost of the current purchase
+	 */
+	public double get_totalCostInclusiveTax() {
+		double totalCost = 0;
+		if ((totalCost = this.get_totalCostExcludingTax()) > 0)
 		{
 			double tax = (totalCost * (double) this.get_taxPercent()) / 100;
 			totalCost += tax;
 		}
-		
 		return totalCost;
-    }
-    
+	}
+	
 	@Override
 	public int describeContents() {
 		return 0;

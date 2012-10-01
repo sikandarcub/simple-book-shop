@@ -43,8 +43,7 @@ public class BookshopLogin extends Activity {
 					String strEmailId = etLoginEmailId.getText().toString();
 					String strPassword = etLoginPassword.getText().toString();
 					
-					if (areInputsFilled(strEmailId, strPassword) == false)
-					{
+					if (areInputsFilled(strEmailId, strPassword) == false) {
 						Toast.makeText(getApplicationContext(), 
 								strValidationFailReason + "\nPlease check and try again.", 
 								Toast.LENGTH_SHORT).show();
@@ -55,7 +54,7 @@ public class BookshopLogin extends Activity {
 						if (db.isValidLogin(currentUser) == true)
 						{
 							Toast.makeText(getApplicationContext(),
-									"You are Logged On." + currentUser.get_fullName(),
+									"You are Logged On.",
 									Toast.LENGTH_SHORT).show();
 							
 							Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
@@ -66,13 +65,11 @@ public class BookshopLogin extends Activity {
 						else
 						{
 							String strToDisplay = null;
-							if (currentUser.is_passwordFailedValidation() == true)
-							{
+							if (currentUser.is_passwordFailedValidation() == true) {
 								strToDisplay = "Your password does not match.\n" +
 										"Please check and try again";
 							}
-							else
-							{
+							else {
 								strToDisplay = "You do not have required access.\n" +
 										"Please register to login.";
 							}
@@ -83,6 +80,7 @@ public class BookshopLogin extends Activity {
 					break;
 				case R.id.tvRegisterHere:
 					Intent i=new Intent(getApplicationContext(), RegisterActivity.class);
+					i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 					startActivity(i);
 					break;
 				default:
@@ -110,8 +108,7 @@ public class BookshopLogin extends Activity {
 	 */
 	private Boolean areInputsFilled(String strEmailId, String strPassword)
 	{
-		if (strEmailId.isEmpty() == true || strPassword.isEmpty() == true )
-		{
+		if (strEmailId.isEmpty() == true || strPassword.isEmpty() == true ) {
 			strValidationFailReason = "One of the Required fields is empty.";
 			return false;
 		}

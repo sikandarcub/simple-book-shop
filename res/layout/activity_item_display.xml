@@ -65,21 +65,14 @@
                 android:layout_marginBottom="20dip"
                 android:text="@string/str_add_to_cart" />
 
-            <!-- Proceed to Checkout -->
-            <TextView
-                android:id="@+id/tvIdLinkToCartDisplay"
-                android:layout_width="wrap_content"
+            <!-- Proceed to Checkout Button -->
+            <Button 
+                android:id="@+id/btnIdLinkToCartDisplay"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dip"
-                android:paddingTop="2dip"
-                android:paddingBottom="2dip"
-                android:paddingLeft="20dip"
-                android:paddingRight="20dip"
-                android:text="@string/str_proceed_to_checkout"
-                android:textSize="16dip"
-                android:textColor="#0000ff"
-                android:background="@drawable/back"/>
+                android:text="@string/str_proceed_to_checkout" />
+
         </LinearLayout>
 
         <!-- Selected Book details block starts -->

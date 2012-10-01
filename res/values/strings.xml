@@ -33,6 +33,8 @@
     <string name="str_exit_app">Exit Application</string>
     <string name="str_app_logo">Application Logo</string>
     <string name="str_sales_tax">Sales Tax(%)</string>
+    <string name="str_sales_tax_calculated">Sales Tax</string>
+    <string name="str_sub_total">Sub Total</string>
     <string name="str_total_cost">Total Cost</string>
     <string name="app_name">Book Shop</string>
     <string name="menu_settings">Settings</string>

@@ -19,44 +19,45 @@
             android:text="@string/str_purchase_summary"
             android:textColor="#E47911"    
             android:textSize="20dip" />
-
-      <!--  Name label -->
-      <TextView 
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/str_user_name"
-          android:inputType="none"
-          android:textColor="#372c24" />
-      
-      <TextView 
-          android:id="@+id/tv_User_FullName"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="5dip"
-          android:layout_marginBottom="10dip"
-          android:padding="2dip"
-          android:singleLine="true"
-          android:background="@drawable/back"
-          android:gravity="left"
-          android:textColor="#000000" />
-            
-      <!-- Email label -->
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/str_login_email"
-          android:textColor="#372c24" />
-
-      <TextView
-          android:id="@+id/tv_User_EmailId"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="5dip"
-          android:background="@drawable/back"
-          android:singleLine="true"
-          android:textColor="#000000" />
         
-    </LinearLayout>    
+        <!--  Name label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_user_name"
+            android:inputType="none"
+            android:textColor="#372c24" />
+        
+        <TextView
+            android:id="@+id/tvPsUserFullName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="10dip"
+            android:padding="2dip"
+            android:singleLine="true"
+            android:background="@drawable/back"
+            android:gravity="left"
+            android:textColor="#000000" />
+        
+        <!-- Email label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_login_email"
+            android:textColor="#372c24" />
+        
+        <TextView
+            android:id="@+id/tvPsUserEmailId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:padding="2dip"
+            android:background="@drawable/back"
+            android:singleLine="true"
+            android:textColor="#000000" />
+    </LinearLayout>
+    <!-- Header section end here -->
 
     <LinearLayout     
         android:id="@+id/llPurchaseSummaryFooter"    
@@ -68,56 +69,113 @@
 
         <!-- Make another Purchase Button -->
         <Button
-            android:id="@+id/btnRestart"
+            android:id="@+id/btnPsRestart"
             android:layout_width="fill_parent"    
             android:layout_height="wrap_content"    
             android:layout_gravity="center"    
             android:layout_marginTop="5dip"    
             android:layout_marginBottom="20dip"    
-            android:text="@string/str_start_another_purchase" />
-
-        <!-- Exit Application Button -->    
-        <Button
-            android:id="@+id/btnExit"    
-            android:layout_width="fill_parent"    
-            android:layout_height="wrap_content"    
-            android:layout_gravity="center"    
-            android:text="@string/str_exit_app" />        
+            android:text="@string/str_start_another_purchase" />     
     </LinearLayout>
+    <!-- Footer section end here -->
 
     <!-- Purchase Summary -->
-    <TableLayout    
-        android:id="@+id/tlPurchaseSummary"    
+    <RelativeLayout 
+        android:id="@+id/rlPurchaseSummary"    
         android:layout_width="fill_parent"    
         android:layout_height="wrap_content"    
         android:layout_below="@+id/llPurchaseSummaryHeader"    
         android:layout_above="@+id/llPurchaseSummaryFooter"
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
-        android:paddingLeft="20dip"
-        android:paddingRight="20dip"
-        android:stretchColumns="0,1,2">    
-            
-        <ListView     
-            android:id="@+id/lvPurchaseSummaryList"    
-            android:layout_width="fill_parent"    
-            android:layout_height="120dip"
-            android:layout_gravity="fill_vertical"
-            android:background="@drawable/back"/>    
-            
-        <TableRow
-            android:layout_width="fill_parent"    
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip">
+        <TableLayout
+            android:id="@+id/tlPsTotals"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"> 
-            <TextView 
-                android:text="@string/str_grand_total"
-                android:gravity="right"/>
-            <TextView 
-                android:id="@+id/tvPurchaseTotal"
-                android:background="@drawable/back"
-                android:layout_marginLeft="10dip"
-                android:gravity="left"/>
-        </TableRow>
-    </TableLayout>
-    
+            android:layout_alignParentBottom="true"
+            android:stretchColumns="0,1,2,3" >
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip">
+                <TextView
+                    android:text="@string/str_sub_total"
+                    android:singleLine="true"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tvPsSubTotal"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:background="@drawable/back"
+                    android:layout_marginLeft="10dip"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tvPsSubTCurrency"
+                    android:layout_width="wrap_content"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:layout_marginLeft="2dip"
+                    android:text="@string/str_book_price_currency"
+                    android:gravity="left"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip">
+                <TextView
+                    android:text="@string/str_sales_tax_calculated"
+                    android:singleLine="true"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tvPsTax"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:background="@drawable/back"
+                    android:layout_marginLeft="10dip"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tvPsSaleTCurrency"
+                    android:layout_width="wrap_content"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:layout_marginLeft="2dip"
+                    android:text="@string/str_book_price_currency"
+                    android:gravity="left"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip">
+                <TextView
+                    android:text="@string/str_grand_total"
+                    android:singleLine="true"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tvPsGrandTotal"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:background="@drawable/back"
+                    android:layout_marginLeft="10dip"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tvPsGrandTCurrency"
+                    android:layout_width="wrap_content"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:layout_marginLeft="2dip"
+                    android:text="@string/str_book_price_currency"
+                    android:gravity="left"/>
+            </TableRow>    
+        </TableLayout>
+        <ListView
+            android:id="@+id/lvPsUserItemList"    
+            android:layout_width="match_parent"    
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_vertical"
+            android:layout_above="@+id/tlPsTotals"
+            android:background="@drawable/back"/>    
+    </RelativeLayout>
+    <!-- Purchase Summary ends here -->
 </RelativeLayout>

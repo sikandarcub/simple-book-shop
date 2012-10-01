@@ -35,18 +35,18 @@ public class ItemDisplayActivity extends Activity {
 	TextView tvIdBookPrice;
 	ImageView ivIdBookCover;
 	Button btnIdItemAdd;
-	TextView tvIdLinkToCartDisplay;
+	Button btnIdLinkToCartDisplay;
 	
-	StoreForBooks bookStore;
-	MerchandiseBooks bookSelected;
+	private StoreForBooks bookStore;
+	private MerchandiseBooks bookSelected;
 	
-	String[] strCategories;
-	String[] strItemsInCategory;
+	private String[] strCategories;
+	private String[] strItemsInCategory;
 	
-	String strSelectedCategory;
-	String strSelectedItem;
+	private String strSelectedCategory;
+	private String strSelectedItem;
 
-	ShopUser currentUser;
+	private ShopUser currentUser;
 	
 	private OnItemSelectedListener myOnItemSelectedListener = new OnItemSelectedListener () {
 
@@ -102,7 +102,7 @@ public class ItemDisplayActivity extends Activity {
 						Toast.LENGTH_SHORT).show();
 				break;
 				
-			case R.id.tvIdLinkToCartDisplay:
+			case R.id.btnIdLinkToCartDisplay:
 				Intent i=new Intent(getApplicationContext(), CartDisplayActivity.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				i.putExtra("in.edureka.transport.ShopUser", currentUser);
@@ -135,13 +135,13 @@ public class ItemDisplayActivity extends Activity {
         tvIdBookPrice = (TextView)findViewById(R.id.tvIdBookPrice);
         ivIdBookCover = (ImageView)findViewById(R.id.ivIdBookCover);
         btnIdItemAdd = (Button)findViewById(R.id.btnIdItemAdd);
-        tvIdLinkToCartDisplay = (TextView)findViewById(R.id.tvIdLinkToCartDisplay);
+        btnIdLinkToCartDisplay = (Button)findViewById(R.id.btnIdLinkToCartDisplay);
         
         spIdCategoryList.setOnItemSelectedListener(myOnItemSelectedListener);
         spIdItemList.setOnItemSelectedListener(myOnItemSelectedListener);
         
         btnIdItemAdd.setOnClickListener(myOnClickListener );
-        tvIdLinkToCartDisplay.setOnClickListener(myOnClickListener);
+        btnIdLinkToCartDisplay.setOnClickListener(myOnClickListener);
 
         initializeCategoryList();
     }
@@ -156,8 +156,7 @@ public class ItemDisplayActivity extends Activity {
         bookStore = new StoreForBooks(taxPercentage, fileDB);
         
         currentUser.set_taxPercent(bookStore.get_taxPercentage());
-        if (bookStore.get_totalNumOfItemInStore() < 0 )
-        {
+        if (bookStore.get_totalNumOfItemInStore() < 0 ) {
         	Toast.makeText(getApplicationContext(), "No Items in Store", Toast.LENGTH_SHORT).show();
         }
         
@@ -177,10 +176,7 @@ public class ItemDisplayActivity extends Activity {
         aaCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         
         spIdCategoryList.setAdapter(aaCategories);
-        
-		Toast.makeText(getApplicationContext(), 
-				"Debug: " + currentUser.get_fullName() + " " + currentUser.get_userName(), 
-				Toast.LENGTH_SHORT).show();		
+
 	}
 
     /**
@@ -234,7 +230,8 @@ public class ItemDisplayActivity extends Activity {
 	 */
 	protected String addItemToUserShoppingList(MerchandiseBooks thisBook) {
 		ShopItem newBoook = new ShopItem(
-				thisBook.get_name(), Double.parseDouble(thisBook.get_price()));
+				thisBook.get_name() + " by " + thisBook.get_authorName(), 
+				Double.parseDouble(thisBook.get_price()));
 		currentUser.add_itemToShoppingList(newBoook);
 		return currentUser.get_itemNames();
 	}

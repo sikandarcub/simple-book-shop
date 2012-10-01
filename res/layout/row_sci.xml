@@ -11,6 +11,7 @@
             android:layout_height="wrap_content"
             android:text="@+id/tvItemName"
             android:textColor="#372c24"
+            android:textStyle="bold"
             android:paddingLeft="5dip"
             android:maxLines="1"/>
         <LinearLayout
@@ -27,7 +28,7 @@
                 android:paddingRight="2dip"
                 android:gravity="left"
                 android:text="@+id/tvItemPrice"
-                android:textColor="#8CA6A4"
+                android:textColor="#2f4f4f"
                 android:textSize="12dip"/>
             <TextView
                 android:id="@+id/tvScItemPriceCurrency"
@@ -38,7 +39,7 @@
                 android:paddingBottom="2dip"
                 android:paddingRight="2dip"
                 android:text="@string/str_book_price_currency"
-                android:textColor="#8CA6A4"
+                android:textColor="#2f4f4f"
                 android:textSize="12dip"/>
         </LinearLayout>
 </LinearLayout>

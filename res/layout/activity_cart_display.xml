@@ -27,7 +27,7 @@
 
         <!-- Update Cart or Exit Application Button -->    
         <Button     
-            android:id="@+id/btnScProceedToCheckoutOrExit"    
+            android:id="@+id/btnScProceedToCheckout"    
             android:layout_width="fill_parent"    
             android:layout_height="wrap_content"    
             android:layout_gravity="center"    
@@ -35,15 +35,13 @@
             android:layout_marginBottom="20dip"    
             android:text="@string/str_proceed_to_confirm_order" />
 
-        <!-- Return to Add More Books link -->
-        <TextView
-            android:id="@+id/tvScLinkToAddItems"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/str_return_to_additems"
-            android:textColor="#0000ff"
-            android:textSize="12dip" />
+        <!-- Return to Add More Books Button -->
+        <Button
+            android:id="@+id/btnScLinkToAddItems"
+            android:layout_width="fill_parent"    
+            android:layout_height="wrap_content"    
+            android:layout_gravity="center"    
+            android:text="@string/str_return_to_additems" />
  
     </LinearLayout>
     <!-- Footer ends here -->
@@ -74,13 +72,14 @@
             android:layout_marginRight="10dip"
             android:orientation="horizontal"
             android:paddingBottom="5dip"
-            android:paddingTop="5dip" >
+            android:paddingTop="5dip">
 
             <TextView 
                 android:text="@string/str_sales_tax"
                 android:layout_width="0dp"
-                android:layout_weight=".35"
+                android:layout_weight=".25"
                 android:layout_height="wrap_content"
+                android:textSize="12dip"
                 android:singleLine="true"
                 android:paddingRight="2dip"
                 android:gravity="right"/>
@@ -89,14 +88,16 @@
                 android:layout_width="0dp"
                 android:layout_weight=".15"
                 android:layout_height="wrap_content"
+                android:textSize="12dip"
                 android:singleLine="true"
                 android:padding="2dip"
                 android:background="@drawable/back"/>
             <TextView 
                 android:text="@string/str_total_cost"
                 android:layout_width="0dp"
-                android:layout_weight=".25"
+                android:layout_weight=".35"
                 android:layout_height="wrap_content"
+                android:textSize="12dip"
                 android:singleLine="true"
                 android:paddingRight="2dip"
                 android:gravity="right"/>
@@ -105,6 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_weight=".25"
                 android:layout_height="wrap_content"
+                android:textSize="12dip"
                 android:singleLine="true"
                 android:padding="2dip"
                 android:background="@drawable/back"/>

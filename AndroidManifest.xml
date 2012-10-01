@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-"
+        
         <activity
             android:name=".BookshopLogin"
             android:screenOrientation="portrait" >
@@ -40,12 +40,8 @@
         </activity>
         <activity
             android:name=".PurchaseSummaryActivity"
-            android:label="@string/title_activity_purchase_summary" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_purchase_summary"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

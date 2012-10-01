@@ -1,5 +1,7 @@
 package in.edureka.bookshopping;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,16 +27,15 @@ import android.widget.Toast;
 
 public class CartDisplayActivity extends Activity implements OnItemClickListener, OnItemLongClickListener {
 
-	Button btnScCheckoutOrExit;
-	TextView tvScLinkToAddItems;
+	Button btnScProceedToCheckout;
+	Button btnScLinkToAddItems;
 	TextView tvScIsEmpty;
 	TextView tvScTaxPercent;
 	TextView tvScGrandTotal;
 	ListView lvScUserItemList;
 	LinearLayout llScShoppingList;
-	Boolean isScEmpty = true;
 	
-	ShopUser currentUser;
+	private ShopUser currentUser;
 	List<ShoppingCartItem> alList;
 	
 	private OnClickListener myOnClickListener = new OnClickListener(){
@@ -42,25 +43,18 @@ public class CartDisplayActivity extends Activity implements OnItemClickListener
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
-			case R.id.btnScProceedToCheckoutOrExit:
-				if (isScEmpty == true) {
-					// Quit Application	
-					Toast.makeText(getApplicationContext(), "Exiting", Toast.LENGTH_SHORT).show();
-					CartDisplayActivity.this.finish();
-				}
-				else {
-					// Proceed to Checkout
-					Intent i=new Intent(getApplicationContext(), PurchaseSummaryActivity.class);
-					i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-					i.putExtra("in.edureka.transport.ShopUser", currentUser);
-					startActivity(i);					
-				}
+			case R.id.btnScProceedToCheckout:
+				// Proceed to Checkout
+				Intent psIntent=new Intent(getApplicationContext(), PurchaseSummaryActivity.class);
+				psIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				psIntent.putExtra("in.edureka.transport.ShopUser", currentUser);
+				startActivity(psIntent);			
 				break;
-			case R.id.tvScLinkToAddItems:
-				Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
-				i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				i.putExtra("in.edureka.transport.ShopUser", currentUser);
-				startActivity(i);
+			case R.id.btnScLinkToAddItems:
+				Intent idIntent=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+				idIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				idIntent.putExtra("in.edureka.transport.ShopUser", currentUser);
+				startActivity(idIntent);
 
 				break;
 		    default:
@@ -82,8 +76,8 @@ public class CartDisplayActivity extends Activity implements OnItemClickListener
         
         setContentView(R.layout.activity_cart_display);
         
-        btnScCheckoutOrExit = (Button)findViewById(R.id.btnScProceedToCheckoutOrExit);
-        tvScLinkToAddItems = (TextView)findViewById(R.id.tvScLinkToAddItems);
+        btnScProceedToCheckout = (Button)findViewById(R.id.btnScProceedToCheckout);
+        btnScLinkToAddItems = (Button)findViewById(R.id.btnScLinkToAddItems);
         tvScIsEmpty = (TextView)findViewById(R.id.tvScIsEmpty);
         tvScTaxPercent = (TextView)findViewById(R.id.tvScTaxPercent);
         tvScGrandTotal = (TextView)findViewById(R.id.tvScGrandTotal);
@@ -116,20 +110,18 @@ public class CartDisplayActivity extends Activity implements OnItemClickListener
         else {
         	tvScIsEmpty.setVisibility(View.GONE);
         	llScShoppingList.setVisibility(View.VISIBLE);
-        	isScEmpty = false;
         	initializeListView();
         	tvScTaxPercent.setText(Float.toString(currentUser.get_taxPercent()));
-        	tvScGrandTotal.setText(Double.toString(currentUser.get_totalCostInclusiveTax()));
+        	updateTotalCost();
         }
-        btnScCheckoutOrExit.setOnClickListener(myOnClickListener );
-        tvScLinkToAddItems.setOnClickListener(myOnClickListener);
+        btnScProceedToCheckout.setOnClickListener(myOnClickListener);
+        btnScLinkToAddItems.setOnClickListener(myOnClickListener);
 	}
     
     private void handleEmptyShoppingCart() {
     	tvScIsEmpty.setVisibility(View.VISIBLE);
     	llScShoppingList.setVisibility(View.GONE);
-    	isScEmpty = true;
-    	btnScCheckoutOrExit.setText(R.string.str_exit_app);
+    	btnScProceedToCheckout.setVisibility(View.GONE);
     }
 
 	private void initializeListView() {
@@ -141,10 +133,8 @@ public class CartDisplayActivity extends Activity implements OnItemClickListener
 	}
 
 	private List<ShoppingCartItem> getShoppingCartItemList() {
-		for (ShopItem item:currentUser.get_shoppingList())
-		{
-			if(item != null)
-			{
+		for (ShopItem item:currentUser.get_shoppingList()) {
+			if(item != null) {
 				ShoppingCartItem newScItem = new ShoppingCartItem(item.get_name(), item.get_price());
 				newScItem.set_quantity(item.get_quantity());
 				newScItem.set_selected(false);
@@ -172,15 +162,24 @@ public class CartDisplayActivity extends Activity implements OnItemClickListener
 				(MyShoppingCartItemAdapter) lvScUserItemList.getAdapter();
 		((MyShoppingCartItemAdapter) aaAdapter).removeItemAt(position);
 		aaAdapter.notifyDataSetChanged();
-		
+		syncShoppingList();
+
 		if (aaAdapter.isEmpty() == true) {
 			handleEmptyShoppingCart();
 		}
 		else {
-			syncShoppingList();
-			tvScGrandTotal.setText(Double.toString(currentUser.get_totalCostInclusiveTax()));
+			updateTotalCost();
 		}
 		return false;
+	}
+
+	private void updateTotalCost() {
+		double totalCost = currentUser.get_totalCostInclusiveTax();
+		NumberFormat fmt = NumberFormat.getNumberInstance();
+		fmt.setMaximumFractionDigits(2);
+		fmt.setRoundingMode(RoundingMode.CEILING);
+		String strTotalCost = fmt.format(totalCost);
+		tvScGrandTotal.setText(strTotalCost);		
 	}
 }
 

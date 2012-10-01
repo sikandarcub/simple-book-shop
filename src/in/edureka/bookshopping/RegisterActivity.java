@@ -68,9 +68,9 @@ public class RegisterActivity extends Activity {
 							if (db.addShopUser(currentUser) == true)
 							{
 								Toast.makeText(getApplicationContext(), 
-										"You are logged in", 
-										Toast.LENGTH_SHORT).show();	
-								Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
+										"Registration successful", 
+										Toast.LENGTH_LONG).show();
+								Intent i = new Intent(getApplicationContext(), BookshopLogin.class);
 								i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 								i.putExtra("in.edureka.transport.ShopUser", currentUser);
 								startActivity(i);
@@ -81,6 +81,7 @@ public class RegisterActivity extends Activity {
 					break;
 				case R.id.tvLinkToLogin:
 					Intent i = new Intent(getApplicationContext(), BookshopLogin.class);
+					i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 					startActivity(i);
 					break;
 				default:
