@@ -6,30 +6,34 @@ public class MerchandiseBasic{
 	private String _name;
 	private String _price;
 	private String _itemCategory;
+	private String _image;
 	
 	protected final static int _posCategory = 0;
 	protected final static int _posName = _posCategory + 1;
 	protected final static int _posPrice = _posName + 1;
-	protected final static int _lastColumn = _posPrice;
+	protected final static int _posImage = _posPrice + 1;
+	protected final static int _lastColumn = _posImage;
 
 	public MerchandiseBasic() {
-		this(null,null,null);
+		this(null,null,null,null);
 	}
 	
-	public MerchandiseBasic(String name, String price, String category) {
+	public MerchandiseBasic(String name, String price, String category, String image) {
 		this._name = name;
 		this._price = price;
 		this._itemCategory = category;
+		this._image = image;
 	}
 
 	public MerchandiseBasic(MerchandiseBasic basicItem) {
 		this(basicItem.get_name(),
 				basicItem.get_price(),
-				basicItem.get_itemCategory());
+				basicItem.get_itemCategory(),
+				basicItem.get_image());
 	}
 	
 	public MerchandiseBasic(String name, String category) {
-		this(name,null,category);
+		this(name,null,category,null);
 	}
 	
 	@Override 
@@ -66,6 +70,14 @@ public class MerchandiseBasic{
 	public void set_itemCategory(String category) {
 		this._itemCategory = category;
 	}
+
+	public String get_image() {
+		return _image;
+	}
+
+	public void set_image(String _image) {
+		this._image = _image;
+	}
 	
 	public static MerchandiseBasic getObj(String str) {
 		
@@ -76,6 +88,7 @@ public class MerchandiseBasic{
 		tempObj.set_itemCategory(temp[_posCategory]);
 		tempObj.set_name(temp[_posName]);
 		tempObj.set_price(temp[_posPrice]);
+		tempObj.set_image(temp[_posImage]);
 		
 		return tempObj;
 	}

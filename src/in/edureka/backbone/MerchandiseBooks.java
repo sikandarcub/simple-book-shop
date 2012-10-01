@@ -13,8 +13,8 @@ public class MerchandiseBooks extends MerchandiseBasic {
 	}
 
 	public MerchandiseBooks(String name, String price, 
-			String categoryName, String authorName) {
-		super(name, price, categoryName);
+			String categoryName, String imageName, String authorName) {
+		super(name, price, categoryName, imageName);
 		this._authorName = authorName;
 	}
 	
@@ -60,6 +60,7 @@ public class MerchandiseBooks extends MerchandiseBasic {
     		tempObj.set_itemCategory(temp[_posCategory]);
     		tempObj.set_name(temp[_posName]);
     		tempObj.set_price(temp[_posPrice]);
+    		tempObj.set_image(temp[_posImage]);
     		tempObj.set_authorName(temp[_posAuthor]);
         }
 

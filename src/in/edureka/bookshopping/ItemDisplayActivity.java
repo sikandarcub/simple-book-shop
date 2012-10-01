@@ -152,7 +152,7 @@ public class ItemDisplayActivity extends Activity {
 	 */
 	private void initializeCategoryList() {
         float taxPercentage = (float) 6.5;
-        String fileDB = new String("fileDB.csv"); 
+        String fileDB = new String("BookShop/db/fileDB.csv"); 
         bookStore = new StoreForBooks(taxPercentage, fileDB);
         
         currentUser.set_taxPercent(bookStore.get_taxPercentage());

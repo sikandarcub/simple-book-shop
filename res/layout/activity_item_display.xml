@@ -40,7 +40,8 @@
             <Spinner 
                 android:id="@+id/spIdItemList"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:soundEffectsEnabled="true"/>
         </LinearLayout>
 
         <!-- Add to Cart Button and Skip to Checkout link -->
