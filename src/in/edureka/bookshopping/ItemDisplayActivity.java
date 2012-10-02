@@ -1,5 +1,6 @@
 package in.edureka.bookshopping;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import in.edureka.backbone.MerchandiseBooks;
@@ -7,8 +8,11 @@ import in.edureka.backbone.StoreForBooks;
 import in.edureka.transport.ShopItem;
 import in.edureka.transport.ShopUser;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -216,12 +220,26 @@ public class ItemDisplayActivity extends Activity {
 		{	
 			tvIdBookAuthor.setText(thisBook.get_authorName());
 			tvIdBookPrice.setText(thisBook.get_price());
+			setBookImage(thisBook.get_image());
 		}
 		
 		bookSelected.set_name(thisBook.get_name());
 		bookSelected.set_price(thisBook.get_price());
 		bookSelected.set_authorName(thisBook.get_authorName());
 	}
+
+	private void setBookImage(String imageName) {
+		File directory = Environment.getExternalStorageDirectory();
+		String strBookImage = "BookShop/images/" + imageName + ".jpg";
+		File file = new File(directory + "/" + strBookImage);	
+		if (file.exists()) {
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inSampleSize = 2;
+			Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+			ivIdBookCover.setImageBitmap(bm);
+		}
+	}
+
 
 	/**
 	 * Adds the selected Book to the Shopping list of the user

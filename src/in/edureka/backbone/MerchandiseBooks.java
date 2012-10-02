@@ -20,7 +20,6 @@ public class MerchandiseBooks extends MerchandiseBasic {
 	
 	public MerchandiseBooks(String name, String categoryName) {
 		super(name, categoryName);
-		// TODO Auto-generated constructor stub
 	}
 
 	public String get_authorName() {
