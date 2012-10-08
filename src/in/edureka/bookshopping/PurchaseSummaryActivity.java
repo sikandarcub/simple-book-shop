@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.edureka.helpers.FinalTransaction;
 import in.edureka.helpers.MyShoppingCartItemAdapter;
 import in.edureka.helpers.ShoppingCartItem;
 import in.edureka.transport.ShopItem;
@@ -31,16 +32,16 @@ public class PurchaseSummaryActivity extends Activity {
 	TextView tvPsTax;
 	TextView tvPsGrandTotal;
 	
-	private ShopUser currentUser;
+	private FinalTransaction thisPurchase;
 	List<ShoppingCartItem> alList;
 	private OnClickListener myOnClickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			currentUser.cleanup_shoppingList();
+			thisPurchase.get_user().cleanup_shoppingList();
 			Intent i=new Intent(getApplicationContext(), ItemDisplayActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-			i.putExtra("in.edureka.transport.ShopUser", currentUser);
+			i.putExtra("in.edureka.transport.ShopUser", thisPurchase.get_user());
 			startActivity(i);
 		}
 		
@@ -49,10 +50,11 @@ public class PurchaseSummaryActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        thisPurchase = new FinalTransaction();
 
         Bundle b = getIntent().getExtras();
-        currentUser =
-			b.getParcelable("in.edureka.transport.ShopUser");
+        thisPurchase.set_user(
+			(ShopUser) b.getParcelable("in.edureka.transport.ShopUser"));
         
         setContentView(R.layout.activity_purchase_summary);
         
@@ -68,7 +70,7 @@ public class PurchaseSummaryActivity extends Activity {
     }
 
     private void setupScreenViews() {
-    	if (currentUser.get_shoppingList().isEmpty() == true) {
+    	if (thisPurchase.get_user().get_shoppingList().isEmpty() == true) {
     		Toast.makeText(getApplicationContext(), 
     				"Possible error.\nPlease contact suppport.", 
     				Toast.LENGTH_SHORT).show();
@@ -76,15 +78,18 @@ public class PurchaseSummaryActivity extends Activity {
     	else {
     		initializeListView();
     		initializeTotals();
-    		tvPsUserFullName.setText(currentUser.get_fullName());
-    		tvPsUserEmailId.setText(currentUser.get_userName());
+    		tvPsUserFullName.setText(thisPurchase.get_user().get_fullName());
+    		tvPsUserEmailId.setText(thisPurchase.get_user().get_userName());
     		btnPsRestart.setOnClickListener(myOnClickListener );
+    		
+    		thisPurchase.set_transactionLog("BookShop/logs/purchases.xml");
+    		thisPurchase.commitDetails();
     	}
 	}
 
 	private void initializeTotals() {
-		double subTotal = currentUser.get_totalCostExcludingTax();
-		double taxCalculated = currentUser.get_totalTax();
+		double subTotal = thisPurchase.get_user().get_totalCostExcludingTax();
+		double taxCalculated = thisPurchase.get_user().get_totalTax();
 		double grandTotal = subTotal + taxCalculated;
 
 		NumberFormat fmt = NumberFormat.getNumberInstance();
@@ -106,7 +111,7 @@ public class PurchaseSummaryActivity extends Activity {
 	}
 
 	private List<ShoppingCartItem> getShoppingCartItemList() {
-		for (ShopItem item:currentUser.get_shoppingList()) {
+		for (ShopItem item:thisPurchase.get_user().get_shoppingList()) {
 			if(item != null) {
 				ShoppingCartItem newScItem = new ShoppingCartItem(item.get_name(), item.get_price());
 				newScItem.set_quantity(item.get_quantity());

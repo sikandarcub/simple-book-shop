@@ -6,21 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import android.os.Environment;
 
-public class CSVFileReader {
+public class BasicFileReader extends BasicFileAccessor{
 	
-	String _fileName;
-	ArrayList<String> _storeValues = new ArrayList<String>();
+
+	ArrayList<String> _values = new ArrayList<String>();
 	
-	public CSVFileReader(String fileName)
-	{
-		this._fileName = fileName;
+	public BasicFileReader(String fileName)	{
+		super(fileName);
 	}
 	
-	public void ReadFile()
-	{
+	public void ReadFile()	{
 		File directory = Environment.getExternalStorageDirectory();
 		File file = new File(directory + "/" + this._fileName);
 		
@@ -37,7 +34,7 @@ public class CSVFileReader {
 			
 			while((line = reader.readLine()) != null)
 			{
-				this._storeValues.add(line);
+				this._values.add(line);
 			}
 			
 			reader.close();
@@ -61,31 +58,6 @@ public class CSVFileReader {
 	}
 	public ArrayList<String> getFileValues()
 	{
-		return this._storeValues;
-	}
-
-	public ArrayList<String> get_distinctColumnValues(int columnNum)
-	{
-		ArrayList<String> columnValues = new ArrayList<String>();
-		String delimiter = "[,]+";
-		
-		for (String str : this._storeValues)
-		{
-			if (str != null)
-			{
-				String[] tokens = str.split(delimiter);
-				columnValues.add(tokens[columnNum - 1]);				
-			}
-		}
-		
-		if (columnValues.size() > 0)
-		{
-			HashSet<String> hs = new HashSet<String>();
-			hs.addAll(columnValues);
-			columnValues.clear();
-			columnValues.addAll(hs);
-		}
-
-		return columnValues;
+		return this._values;
 	}
 }

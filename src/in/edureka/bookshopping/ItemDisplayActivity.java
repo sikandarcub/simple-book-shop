@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -143,8 +144,9 @@ public class ItemDisplayActivity extends Activity {
         
         spIdCategoryList.setOnItemSelectedListener(myOnItemSelectedListener);
         spIdItemList.setOnItemSelectedListener(myOnItemSelectedListener);
+        spIdItemList.playSoundEffect(SoundEffectConstants.CLICK);
         
-        btnIdItemAdd.setOnClickListener(myOnClickListener );
+        btnIdItemAdd.setOnClickListener(myOnClickListener);
         btnIdLinkToCartDisplay.setOnClickListener(myOnClickListener);
 
         initializeCategoryList();

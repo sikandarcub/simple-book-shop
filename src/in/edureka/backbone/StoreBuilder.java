@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-import in.edureka.utils.CSVFileReader;
+import in.edureka.utils.BasicFileReader;
 
 /**
  * Class handles getting the data from various sources for building a store
  * @author Krishna Koneru
- * @see CSVFileReader, MerchandiseBasic, MerchandiseBooks
+ * @see BasicFileReader, MerchandiseBasic
  *
  */
 public class StoreBuilder {
@@ -31,7 +31,7 @@ public class StoreBuilder {
 
 	private void set_fileValues()
 	{
-		CSVFileReader reader = new CSVFileReader(this._fileName);
+		BasicFileReader reader = new BasicFileReader(this._fileName);
 		reader.ReadFile();
 		this._fileValues = reader.getFileValues();
 	}
